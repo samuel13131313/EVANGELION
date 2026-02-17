@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evangelion Craft</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#0b0b0b;
+color:white;
+text-align:center;
+}
+
+header{
+background:#111;
+padding:15px;
+box-shadow:0 0 15px #a600ff;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+h1,h2{color:#c300ff;}
+
+button{
+background:#a600ff;
+border:none;
+padding:10px 20px;
+margin:10px;
+color:white;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 0 10px #a600ff;
+}
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px #c300ff;
+}
+
+.container{
+padding:30px;
+display:none;
+}
+
+/* CARDS PADRÃO */
+.card{
+background:#151515;
+padding:20px;
+border-radius:12px;
+margin:20px auto;
+max-width:400px;
+box-shadow:0 0 15px rgba(166,0,255,0.3);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 25px #a600ff;
+}
+
+/* MODAL */
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+display:none;
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:#111;
+padding:30px;
+border-radius:12px;
+box-shadow:0 0 20px #a600ff;
+}
+
+/* BOTÃO HOME */
+.btn-destaque{
+font-size:20px;
+padding:15px 50px;
+margin-top:25px;
+background:linear-gradient(45deg,#a600ff,#ff00ff);
+box-shadow:0 0 35px #c300ff;
+border-radius:12px;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%{box-shadow:0 0 15px #c300ff;}
+50%{box-shadow:0 0 45px #ff00ff;}
+100%{box-shadow:0 0 15px #c300ff;}
+}
+
+.banner{
+width:95%;
+max-width:600px;
+border-radius:20px;
+box-shadow:0 0 40px #a600ff;
+margin-top:20px;
+}
+
+/* ===== MENU CATEGORIAS ===== */
+
+.categoria-card{
+margin:30px auto;
+max-width:450px;
+cursor:pointer;
+}
+
+.btn-categoria{
+width:100%;
+font-size:22px;
+padding:18px;
+background:#a600ff;
+border:none;
+border-radius:12px;
+color:white;
+box-shadow:0 0 20px #a600ff;
+transition:0.3s;
+}
+
+.btn-categoria:hover{
+transform:scale(1.03);
+box-shadow:0 0 35px #ff00ff;
+}
+
+.destaque{
+background:linear-gradient(45deg,#c300ff,#ff00ff);
+box-shadow:0 0 40px #ff00ff;
+animation:pulseCategoria 1.5s infinite;
+}
+
+@keyframes pulseCategoria{
+0%{box-shadow:0 0 20px #ff00ff;}
+50%{box-shadow:0 0 60px #ff00ff;}
+100%{box-shadow:0 0 20px #ff00ff;}
+}
+
+.img-categoria{
+width:100%;
+margin-top:12px;
+border-radius:15px;
+box-shadow:0 0 25px #a600ff;
+}
+
+.btn-voltar-fixo{
+position:fixed;
+bottom:20px;
+left:20px;
+background:linear-gradient(45deg,#ff00ff,#a600ff);
+padding:12px 35px;
+font-size:18px;
+border-radius:12px;
+box-shadow:0 0 25px #ff00ff;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>🔥 Evangelion Craft</h2>
+<button onclick="openCart()">🛒 Carrinho</button>
+</header>
+
+<!-- HOME -->
+<div id="home" class="container" style="display:block;">
+
+<img src="banner.png" class="banner" alt="Banner Loja">
+
+<h1 style="
+font-size:32px;
+margin-top:25px;
+background:linear-gradient(45deg,#c300ff,#ff00ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:0 0 25px #a600ff;
+">
+✨ BEM-VINDO À LOJA OFICIAL ✨
+</h1>
+
+<button class="btn-destaque" onclick="showSection('menu')">
+🚀 Ver Loja
+</button>
+
+</div>
+
+<!-- MENU -->
+<div id="menu" class="container">
+
+<h2 style="font-size:28px; margin-bottom:30px;">
+🔥 Escolha uma categoria 🔥
+</h2>
+
+<div class="categoria-card" onclick="showSection('vips')">
+<button class="btn-categoria destaque">💎 VIPs</button>
+<img src="vip-banner.png" class="img-categoria">
+</div>
+
+<div class="categoria-card" onclick="showSection('kits')">
+<button class="btn-categoria">⚔ Kits</button>
+<img src="kit-banner.png" class="img-categoria">
+</div>
+
+<div class="categoria-card" onclick="showSection('kitfarm')">
+<button class="btn-categoria">🌾 Kit Farm</button>
+<img src="farm-banner.png" class="img-categoria">
+</div>
+
+<button class="btn-voltar-fixo" onclick="showSection('home')">
+⬅ Voltar
+</button>
+
+</div>
+<!-- VIPS -->
+<div id="vips" class="container">
+<h2 style="font-size:28px;">💎 VIPs em Destaque 💎</h2>
+
+<div class="card" style="border:2px solid #ff00ff; box-shadow:0 0 30px #ff00ff;">
+<h3>VIP SUPER - R$20</h3>
+
+<img src="vip-super.png" style="width:100%;max-width:320px;margin:15px auto;border-radius:15px;box-shadow:0 0 20px #a600ff;">
+
+<ul style="list-style:none;padding:0;text-align:left;">
+<li>✔ Tag VIP SUPER</li>
+<li>✔ /kit super</li>
+<li>✔ 2 homes extras</li>
+<li>✔ 10k money</li>
+</ul>
+
+<button onclick="addCart('VIP SUPER',20,this)">Comprar</button>
+</div>
+
+
+<div class="card" style="border:2px solid #ff00ff; box-shadow:0 0 30px #ff00ff;">
+<h3>VIP ULTRA - R$30</h3>
+
+<img src="vip-ultra.png" style="width:100%;max-width:320px;margin:15px auto;border-radius:15px;box-shadow:0 0 20px #a600ff;">
+
+<ul style="list-style:none;padding:0;text-align:left;">
+<li>✔ Tudo do SUPER</li>
+<li>✔ /fly</li>
+<li>✔ 5 homes extras</li>
+<li>✔ 25k money</li>
+</ul>
+
+<button onclick="addCart('VIP ULTRA',30,this)">Comprar</button>
+</div>
+
+
+<div class="card" style="border:2px solid #ff00ff; box-shadow:0 0 30px #ff00ff;">
+<h3>VIP ULTRA PRIME - R$40</h3>
+
+<img src="vip-prime.png" style="width:100%;max-width:320px;margin:15px auto;border-radius:15px;box-shadow:0 0 20px #a600ff;">
+
+<ul style="list-style:none;padding:0;text-align:left;">
+<li>✔ Tudo do ULTRA</li>
+<li>✔ /god</li>
+<li>✔ 50k money</li>
+<li>✔ Caixa especial</li>
+</ul>
+
+<button onclick="addCart('VIP ULTRA PRIME',40,this)">Comprar</button>
+</div>
+
+<button onclick="showSection('menu')">⬅ Voltar</button>
+</div>
+<!-- KITS -->
+<div id="kits" class="container">
+<h2 style="font-size:30px;">🎁 Kits em Destaque 🎁</h2>
+
+<div class="card" style="border:2px solid #00ffff; box-shadow:0 0 30px #00ffff;">
+<h3>KIT PVP - R$15</h3>
+
+<img src="kit-pvp.png" style="width:100%;max-width:320px;margin:15px auto;border-radius:15px;box-shadow:0 0 20px #00ffff;">
+
+<ul style="list-style:none;padding:0;text-align:left;">
+<li>✔ Espada Full Encantada</li>
+<li>✔ Armadura P4</li>
+<li>✔ 16 Maçãs Douradas</li>
+<li>✔ 5 Totens</li>
+</ul>
+
+<button onclick="addCart('KIT PVP',15,this)">Adicionar ao Carrinho</button>
+</div>
+
+
+<div class="card" style="border:2px solid #00ffff; box-shadow:0 0 30px #00ffff;">
+<h3>KIT BUILDER - R$10</h3>
+
+<img src="kit-builder.png" style="width:100%;max-width:320px;margin:15px auto;border-radius:15px;box-shadow:0 0 20px #00ffff;">
+
+<ul style="list-style:none;padding:0;text-align:left;">
+<li>✔ 5k Blocos variados</li>
+<li>✔ Fly 1h</li>
+<li>✔ Ferramentas Full</li>
+<li>✔ 10k money</li>
+</ul>
+
+<button onclick="addCart('KIT BUILDER',10,this)">Adicionar ao Carrinho</button>
+</div>
+
+
+<div class="card" style="border:2px solid gold; box-shadow:0 0 35px gold;">
+<h3>KIT FARM - R$12 ⭐</h3>
+
+<img src="kit-farm.png" style="width:100%;max-width:320px;margin:15px auto;border-radius:15px;box-shadow:0 0 25px gold;">
+
+<ul style="list-style:none;padding:0;text-align:left;">
+<li>✔ 10 Spawners</li>
+<li>✔ 64 Blocos de Terra</li>
+<li>✔ 20 Sementes Raras</li>
+<li>✔ 15k money</li>
+</ul>
+
+<button onclick="addCart('KIT FARM',12,this)">Adicionar ao Carrinho</button>
+</div>
+
+<button onclick="showSection('home')">⬅ Voltar</button>
+</div>
+<!-- KIT FARM -->
+<div id="kitfarm" class="container">
+
+<h2 style="
+font-size:30px;
+color:#00ff00;
+text-shadow:0 0 20px #00ff00;
+">
+🌱 KITS DE FARM 🌱
+</h2>
+
+<!-- KIT FARM PADRÃO -->
+<div class="card" style="
+border:3px solid #00ff00;
+box-shadow:0 0 40px #00ff00;
+background:linear-gradient(145deg,#0f1f0f,#111);
+">
+
+<h3>KIT FARM - R$12</h3>
+
+<img src="kit-farm.png"
+style="width:100%;max-width:330px;margin:20px auto;display:block;border-radius:15px;border:2px solid #00ff00;box-shadow:0 0 25px #00ff00;">
+
+<ul style="list-style:none;padding:0;text-align:left;line-height:26px;">
+<li>✔ 10 Spawners</li>
+<li>✔ 64 Blocos de Terra</li>
+<li>✔ 20 Sementes Raras</li>
+<li>✔ 5 Baldes de Água</li>
+<li>✔ 15k money</li>
+</ul>
+
+<button onclick="addCart('KIT FARM',12,this)"
+style="background:#00ff00;color:black;font-weight:bold;box-shadow:0 0 20px #00ff00;">
+🛒 ADICIONAR AO CARRINHO
+</button>
+
+</div>
+
+
+<!-- KIT COMIDA -->
+<div class="card" style="
+border:3px solid #ff9900;
+box-shadow:0 0 40px #ff9900;
+background:linear-gradient(145deg,#221500,#111);
+">
+
+<h3>🍖 KIT COMIDA - R$8</h3>
+
+<img src="kit-comida.png"
+style="width:100%;max-width:330px;margin:20px auto;display:block;border-radius:15px;border:2px solid #ff9900;box-shadow:0 0 25px #ff9900;">
+
+<ul style="list-style:none;padding:0;text-align:left;line-height:26px;">
+<li>✔ 64 Carne Assada</li>
+<li>✔ 32 Maçãs Douradas</li>
+<li>✔ 16 Pães</li>
+<li>✔ 10 Sopas</li>
+<li>✔ 5 Poções de Regeneração</li>
+</ul>
+
+<button onclick="addCart('KIT COMIDA',8,this)"
+style="background:#ff9900;color:black;font-weight:bold;box-shadow:0 0 20px #ff9900;">
+🛒 ADICIONAR AO CARRINHO
+</button>
+
+</div>
+
+
+<!-- KIT DE FARMS AVANÇADO -->
+<div class="card" style="
+border:3px solid gold;
+box-shadow:0 0 45px gold;
+background:linear-gradient(145deg,#2a2a00,#111);
+">
+
+<h3>🌾 KIT DE FARMS - R$18 ⭐</h3>
+
+<img src="kit-farms.png"
+style="width:100%;max-width:330px;margin:20px auto;display:block;border-radius:15px;border:2px solid gold;box-shadow:0 0 30px gold;">
+
+<ul style="list-style:none;padding:0;text-align:left;line-height:26px;">
+<li>✔ 20 Spawners</li>
+<li>✔ 128 Blocos de Terra</li>
+<li>✔ 40 Sementes Raras</li>
+<li>✔ 10 Baldes de Água</li>
+<li>✔ 30k money</li>
+<li>✔ Bônus +30% produção por 2h</li>
+</ul>
+
+<button onclick="addCart('KIT DE FARMS',18,this)"
+style="background:gold;color:black;font-weight:bold;box-shadow:0 0 25px gold;">
+🛒 ADICIONAR AO CARRINHO
+</button>
+
+</div>
+
+<br>
+
+<button onclick="showSection('home')"
+style="background:#00ff00;color:black;font-weight:bold;box-shadow:0 0 20px #00ff00;">
+⬅ VOLTAR
+</button>
+
+</div>
+
+<script>
+let cart = [];
+
+function showSection(id){
+  const sections = ["home","menu","vips","kits","kitfarm"];
+  sections.forEach(sec => document.getElementById(sec).style.display="none");
+  document.getElementById(id).style.display="block";
+}
+
+function addCart(nome, preco, botao){
+  let itens = [];
+  if(botao){
+    let lista = botao.parentElement.querySelectorAll("li");
+    lista.forEach(item => itens.push(item.innerText));
+  }
+  cart.push({nome, preco, itens});
+  alert("✅ "+nome+" foi adicionado ao carrinho!\n\nItens:\n"+itens.join("\n"));
+}
+
+function openCart(){
+  document.getElementById("cart").style.display="flex";
+  updateCart();
+}
+
+function closeCart(){
+  document.getElementById("cart").style.display="none";
+}
+
+function updateCart(){
+  let html = "";
+  let total = 0;
+  cart.forEach(item => {
+    html += `<p>${item.nome} - R$ ${item.preco}</p>`;
+    total += item.preco;
+  });
+  document.getElementById("cartItems").innerHTML = html;
+  document.getElementById("total").innerText = "Total: R$ " + total.toFixed(2);
+}
+
+function confirmarCompra(){
+  const modal = document.getElementById("cart");
+  modal.innerHTML = ""; // limpa conteúdo atual
+  modal.style.display = "flex";
+
+  const content = document.createElement("div");
+  content.className = "modal-content";
+  content.innerHTML = `
+    <h2>⚠️ Você quer realmente terminar a compra?</h2>
+    <button id="simBtn" style="background:linear-gradient(45deg,#a600ff,#ff00ff);color:white;padding:12px 30px;margin:10px;">SIM</button>
+    <button id="naoBtn" style="background:#555;color:white;padding:12px 30px;margin:10px;">NÃO</button>
+  `;
+  modal.appendChild(content);
+
+  document.getElementById("naoBtn").onclick = () => {
+    content.innerHTML = `
+      <h2>😔 Que pena!</h2>
+      <button onclick="closeCart();showSection('home')">⬅ Voltar</button>
+    `;
+  };
+
+  document.getElementById("simBtn").onclick = () => {
+    content.innerHTML = `
+      <h2>✅ Você confirmou!</h2>
+      <p>Faça o PIX para: <b>caleoconceicao0@gmail.com</b></p>
+      <h3 id="timer">03:00</h3>
+    `;
+    let duration = 180;
+    let timerEl = document.getElementById("timer");
+    let timer = setInterval(() => {
+      let minutes = Math.floor(duration / 60);
+      let seconds = duration % 60;
+      timerEl.innerText = `${minutes.toString().padStart(2,"0")}:${seconds.toString().padStart(2,"0")}`;
+      duration--;
+      if(duration < 0){
+        clearInterval(timer);
+        content.innerHTML = `
+          <h2>⏰ O tempo terminou!</h2>
+          <p>Você fez o PIX?</p>
+          <button id="simPixBtn" style="background:linear-gradient(45deg,#a600ff,#ff00ff);color:white;padding:12px 30px;margin:10px;">SIM</button>
+          <button id="naoPixBtn" style="background:#555;color:white;padding:12px 30px;margin:10px;">NÃO</button>
+        `;
+        document.getElementById("simPixBtn").onclick = () => {
+          content.innerHTML = `
+            <h2>🎉 Compra finalizada!</h2>
+            <p>Chame o Nefesto no Discord.</p>
+          `;
+          cart = [];
+          updateCart();
+        };
+        document.getElementById("naoPixBtn").onclick = () => {
+          content.innerHTML = `
+            <h2>😔 Que pena!</h2>
+            <button onclick="closeCart();showSection('home')">⬅ Voltar</button>
+          `;
+        };
+      }
+    }, 1000);
+  };
+}
+</script>
+
+
+<!-- MODAL CARRINHO -->
+<div id="cart" class="modal">
+  <div class="modal-content">
+    <h2>🛒 Seu Carrinho</h2>
+    <div id="cartItems" style="margin-top:15px;"></div>
+    <h3 id="total" style="margin-top:15px;"></h3>
+    <button onclick="confirmarCompra()">✅ Finalizar Compra</button>
+    <button onclick="closeCart()">❌ Fechar</button>
+  </div>
+</div>
+
+<!-- MODAL CONFIRMAÇÃO -->
+<div id="confirmModal" class="modal">
+  <div class="modal-content">
+    <h2>⚠️ Você quer realmente terminar a compra?</h2>
+    <button id="btnSim" style="background:linear-gradient(45deg,#a600ff,#ff00ff);color:white;padding:12px 30px;margin:10px;">SIM</button>
+    <button id="btnNao" style="background:#555;color:white;padding:12px 30px;margin:10px;">NÃO</button>
+  </div>
+</div>
+
+<!-- MODAL PIX -->
+<div id="pixModal" class="modal">
+  <div class="modal-content">
+    <h2>💰 Você confirmou!</h2>
+    <p>Faça o PIX para: <b>caleoconceicao0@gmail.com</b></p>
+    <p id="timer" style="font-size:24px;margin:15px 0;">03:00</p>
+    <button id="pixSim" style="background:linear-gradient(45deg,#a600ff,#ff00ff);color:white;padding:12px 30px;margin:10px;">✅ Fiz o PIX</button>
+    <button id="pixNao" style="background:#555;color:white;padding:12px 30px;margin:10px;">❌ Não fiz</button>
+  </div>
+</div>
+
+<!-- MODAL FINAL -->
+<div id="finalModal" class="modal">
+  <div class="modal-content">
+    <h2>🎉 Chame o Nefesto no Discord!</h2>
+    <button onclick="closeCart()" style="background:linear-gradient(45deg,#a600ff,#ff00ff);color:white;padding:12px 30px;margin:10px;">OK</button>
+  </div>
+</div>
+
+</body>
+</html>
